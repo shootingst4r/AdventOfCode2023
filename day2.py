@@ -1,9 +1,6 @@
 input = open("input2.txt","r")
 inputlines = input.readlines()
 input.close()
-redMax = 12
-greenMax = 13
-blueMax = 14
 
 result = 0 
 
@@ -13,27 +10,29 @@ for textLine in inputlines:
     colors = splitLine[2:]
     colors = "".join(colors).lower().replace("\n", "")
     pullList = colors.split(";")
-    itdobeworking = True
+    highestRed = 0
+    hightestGreen = 0 
+    hightestBlue = 0 
     for currPull in pullList:
         for i in range(len(currPull)):
             nom = currPull.split(",")
             for y in nom:
                 if "red" in y:
                     num = int(y[:-3])
-                    if num > redMax:
-                        itdobeworking = False
+                    if num > highestRed:
+                        highestRed = num
                     pass
                 elif "green" in y:
                     num = int(y[:-5])
-                    if num > greenMax:
-                        itdobeworking = False
+                    if num > hightestGreen:
+                        hightestGreen = num
                     pass
                 elif "blue" in y:
                     num = int(y[:-4])
-                    if num > blueMax:
-                        itdobeworking = False
+                    if num > hightestBlue:
+                        hightestBlue = num
                     pass
-    if itdobeworking == True:
-        result += gameId
+    power = highestRed*hightestGreen*hightestBlue
+    result += power
 
 print(result)
